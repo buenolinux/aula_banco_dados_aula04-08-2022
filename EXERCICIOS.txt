@@ -1,0 +1,133 @@
+CREATE DATABASE mundo;
+USE mundo;
+CREATE TABLE tab_pais (
+    id_pais INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    continente VARCHAR(50) NOT NULL,
+    populacao FLOAT NOT NULL,
+    pib INT NOT NULL,
+    expextativa_vida DECIMAL(10,2)NOT NULL
+   );
+
+CREATE TABLE tab_cidade(
+    id_cidade INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    pais VARCHAR(50) NOT NULL,
+    populacao FLOAT NOT NULL,
+    capital VARCHAR(1) NOT NULL
+   );
+
+CREATE TABLE tab_rio(
+    id_rio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    nascente VARCHAR(50) NOT NULL,
+    pais VARCHAR(50) NOT NULL,
+    comprimento FLOAT NOT NULL
+   );
+
+INSERT INTO tab_pais ( nome, continente, populacao,pib, expextativa_vida)
+VALUES ('Canada','América do Norte', 30.1, 658, 77.08),
+('México', 'América do Norte',107.5, 694, 69.1),
+('Brasil', 'América do Sul', 183.3, 10004, 65.2),
+('USA', 'América do Norte',270.0, 8003, 75.5);
+
+
+INSERT INTO tab_cidade(nome,  pais, populacao, capital)
+VALUES
+('Washington', 'USA', 3.3, 'S'),
+('Monterrey', 'México', 2.0, 'N'),
+('Brasilia', 'Brasil', 1.5, 'S'),
+('São Paulo', 'Brasil', 15.0, 'N'),
+('Ottawa', 'Canada', 0.8, 'S'),
+('Cidade do México', 'México', 14.1, 'S');
+
+
+INSERT INTO tab_rio(nome, nascente, pais, comprimento)
+VALUES
+
+('St. Lawrence', 'USA', 'USA', 3.3),
+('Grande', 'USA', 'México', 2.0),
+('Paraná', 'Brasil', 'Brasil', 1.5),
+('Mississipi', 'USA', 'USA', 15.0);
+
+/*
+. Liste todas as cidades e os países os quais conhece
+*/
+
+SELECT tab_pais.nome, tab_cidade.nome FROM tab_pais, tab_cidade
+WHERE tab_pais.nome = 'Brasil'  and tab_cidade.nome =  'São Paulo'
+;
+
+/*
+Liste todas as cidades que são capitais
+
+*/
+SELECT  nome FROM  tab_cidade
+WHERE capital =  'S';
+
+
+/*
+6. Liste todos os atributos dos países onde a expectativa de vida é menor que 70 anos
+
+*/
+
+SELECT * FROM tab_pais  WHERE expextativa_vida > 70
+/*
+Liste todas as capitais e as populações dos
+ países cujos pib é maior que 1 trilhão de
+dólares
+
+*/
+
+SELECT 
+tab_cidade.nome,
+tab_pais.populacao  
+FROM tab_cidade,tab_pais  WHERE tab_pais.pib  > 1000
+AND tab_pais.nome = tab_cidade.pais
+AND tab_cidade.capital ='s';
+
+/* Qual é o nome e a população da capital
+ do país onde o rio St Lawrence tem sua
+nascente?
+ */
+
+
+SELECT  
+tab_cidade.nome AS 'Nome da cidade', 
+tab_cidade.populacao AS 'População', 
+tab_rio.nome AS 'Nome do rio',
+tab_rio.pais AS 'Pais'
+FROM  tab_cidade, tab_rio
+WHERE tab_rio.nome =  'St. Lawrence'
+AND tab_rio.pais = tab_cidade.pais
+;
+
+/* 9. Qual é a média da população das cidades que não são capitais?
+*/
+
+SELECT AVG(populacao) AS 'Médias das capitais' FROM tab_cidade WHERE capital ='s';
+
+/*
+10. Para cada continente retorne o pib médio de seu país
+
+*/
+
+SELECT AVG(pib) FROM tab_pais WHERE continente ='América do Norte';
+SELECT AVG(pib) FROM tab_pais WHERE continente ='América do Sul';
+
+
+/*
+Para cada país onde pelo menos 2 rios têm nascentes, encontre o comprimento do
+menor rio
+
+*/
+
+SELECT pais, min(comprimento) AS 'Menor comprimento' FROM tab_rio WHERE nascente = pais
+
+SELECT (COUNT(nascente)>2), pais, min(comprimento) FROM tab_rio WHERE nascente = pais;
+
+
+
+/*. Liste os países cujo pib é maior que o pib do Canadá.*/
+
+SELECT nome AS 'paises com o PIB maior do PIB do Canada 'FROM tab_pais WHERE pib > 658
