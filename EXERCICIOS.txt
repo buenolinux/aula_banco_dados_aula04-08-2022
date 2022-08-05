@@ -105,7 +105,7 @@ AND tab_rio.pais = tab_cidade.pais
 /* 9. Qual é a média da população das cidades que não são capitais?
 */
 
-SELECT AVG(populacao) AS 'Médias das capitais' FROM tab_cidade WHERE capital ='s';
+SELECT AVG(populacao) AS 'Médias das capitais' FROM tab_cidade WHERE capital ='n';
 
 /*
 10. Para cada continente retorne o pib médio de seu país
