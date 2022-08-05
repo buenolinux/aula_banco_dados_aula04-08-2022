@@ -55,14 +55,14 @@ VALUES
 */
 
 SELECT tab_pais.nome, tab_cidade.nome FROM tab_pais, tab_cidade
-WHERE tab_pais.nome = 'Brasil'  and tab_cidade.nome =  'São Paulo'
+WHERE tab_pais.nome = 'Brasil'  and tab_cidade.nome =  'São Paulo';
 ;
 
 /*
 Liste todas as cidades que são capitais
 
 */
-SELECT  nome FROM  tab_cidade
+SELECT  nome AS 'Capitais' FROM  tab_cidade
 WHERE capital =  'S';
 
 
@@ -71,7 +71,7 @@ WHERE capital =  'S';
 
 */
 
-SELECT * FROM tab_pais  WHERE expextativa_vida > 70
+SELECT * FROM tab_pais  WHERE expextativa_vida > 70;
 /*
 Liste todas as capitais e as populações dos
  países cujos pib é maior que 1 trilhão de
@@ -80,8 +80,8 @@ dólares
 */
 
 SELECT 
-tab_cidade.nome,
-tab_pais.populacao  
+tab_cidade.nome  AS 'Capitais',
+tab_pais.populacao AS 'População' 
 FROM tab_cidade,tab_pais  WHERE tab_pais.pib  > 1000
 AND tab_pais.nome = tab_cidade.pais
 AND tab_cidade.capital ='s';
@@ -112,8 +112,8 @@ SELECT AVG(populacao) AS 'Médias das capitais' FROM tab_cidade WHERE capital ='
 
 */
 
-SELECT AVG(pib) FROM tab_pais WHERE continente ='América do Norte';
-SELECT AVG(pib) FROM tab_pais WHERE continente ='América do Sul';
+SELECT AVG(pib) AS 'Média do PIB' FROM tab_pais WHERE continente ='América do Norte';
+SELECT AVG(pib) AS 'Média do PIB' FROM tab_pais WHERE continente ='América do Sul';
 
 
 /*
