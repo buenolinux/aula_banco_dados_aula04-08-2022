@@ -114,7 +114,7 @@ SELECT AVG(populacao) AS 'Médias das capitais' FROM tab_cidade WHERE capital ='
 
 SELECT AVG(pib) AS 'Média do PIB' FROM tab_pais WHERE continente ='América do Norte';
 SELECT AVG(pib) AS 'Média do PIB' FROM tab_pais WHERE continente ='América do Sul';
-
+SELECT AVG(pib) AS 'Média do PIB',continente FROM tab_pais WHERE continente ='América do Norte' or continente ='América do Sul' GROUP BY continente;
 
 /*
 Para cada país onde pelo menos 2 rios têm nascentes, encontre o comprimento do
