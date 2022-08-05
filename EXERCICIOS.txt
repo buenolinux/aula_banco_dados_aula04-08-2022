@@ -6,7 +6,7 @@ CREATE TABLE tab_pais (
     continente VARCHAR(50) NOT NULL,
     populacao FLOAT NOT NULL,
     pib INT NOT NULL,
-    expextativa_vida DECIMAL(10,2)NOT NULL
+    expextativa_vida FLOAT NOT NULL
    );
 
 CREATE TABLE tab_cidade(
